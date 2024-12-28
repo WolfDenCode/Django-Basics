@@ -24,6 +24,12 @@ def product(request, pk):
         "price": float(product.price),
         "stock": product.stock,
         "created_at": product.created_at,
+        "tags": list(product.tags.values("name")),
+        "category": {
+            "id": product.category.id,
+            "name": product.category.name,
+            "description": product.category.description,
+        },
     }
     return JsonResponse(product_json)
 

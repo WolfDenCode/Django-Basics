@@ -1,0 +1,43 @@
+from shop.models import Category, Tag, Product, ProductDetail  # Adjust the import path if your app is not named "shop"
+
+# Create Categories
+electronics = Category.objects.create(name="Electronics", description="Electronic devices and gadgets.")
+furniture = Category.objects.create(name="Furniture", description="Home and office furniture.")
+
+# Create Tags
+tag_new = Tag.objects.create(name="New")
+tag_discount = Tag.objects.create(name="Discount")
+
+# Create Products
+laptop = Product.objects.create(
+    name="Laptop",
+    description="A high-performance laptop for gaming and work.",
+    price=1500.00,
+    stock=10,
+    category=electronics
+)
+laptop.tags.add(tag_new, tag_discount)  # Associate tags with the product
+
+chair = Product.objects.create(
+    name="Office Chair",
+    description="Ergonomic chair for office use.",
+    price=200.00,
+    stock=25,
+    category=furniture
+)
+chair.tags.add(tag_discount)  # Associate tags with the product
+
+# Create Product Details
+ProductDetail.objects.create(
+    product=laptop,
+    manufacturer="TechBrand",
+    warranty_period=24,
+    additional_info="Supports up to 64GB of RAM."
+)
+
+ProductDetail.objects.create(
+    product=chair,
+    manufacturer="HomeComfort",
+    warranty_period=12,
+    additional_info="Comes with a 1-year warranty."
+)
